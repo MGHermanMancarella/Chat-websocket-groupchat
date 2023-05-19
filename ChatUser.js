@@ -63,12 +63,18 @@ class ChatUser {
     })
   }
 
+  /** Handle a joke: broadcast to user.
+   *
+   * @param text {string} joke to send
+   * */
   handleJoke (text) {
-    client.send({
-      name: this.name,
-      type: 'chat',
-      text: text
-    })
+    this.send(
+      JSON.stringify({
+        name: 'Joke Daddy',
+        type: 'chat',
+        text: text
+      })
+    )
   }
 
   /** Handle messages from client:
