@@ -77,6 +77,28 @@ class ChatUser {
     )
   }
 
+  // chatUser
+      // formatAllUserMsg => “In room: juanita, jenny, jeff”.
+  formatAllUserMsg() {
+    const users = this.room.getAllUsers();
+
+    return `In room: ` + users.join(', ')
+  }
+
+    // chatUser we will need to see if type: "members"
+      // then call handleMembers
+        // handle will use static method of getAllUsers and return 
+        // all current users in an array 
+  handleMembers(text) {
+    this.send(
+      JSON.stringify({
+        name: 'Kadeem',
+        type: 'chat',
+        text: text
+      })
+    )
+  }
+
   /** Handle messages from client:
    *
    * @param jsonData {string} raw message data
@@ -93,6 +115,7 @@ class ChatUser {
     if (msg.type === 'join') this.handleJoin(msg.name)
     else if (msg.type === 'chat') this.handleChat(msg.text)
     else if (msg.type === 'joke') this.handleJoke(await this.getDadJoke())
+    else if (msg.type === 'members') this.handleMembers(this.formatAllUserMsg())
     else throw new Error(`bad message: ${msg.type}`)
   }
 
@@ -102,7 +125,7 @@ class ChatUser {
         Accept: 'text/plain'
       }
     })
-    console.log(joke)
+    
     return joke.data
   }
 

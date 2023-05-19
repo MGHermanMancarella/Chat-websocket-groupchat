@@ -39,22 +39,39 @@ class Room {
     this.members = new Set();
   }
 
-  /** Handle member joining a room.
-   *
-   * @param member {ChatUser} joining member
+  //TODO: send list of all users in room to user who typed /members 
+    // update our form .val to account "/members"
+    // have a static method for getting all users in a room
+  
+    
+    
+    /** Handle member joining a room.
+     *
+     * @param member {ChatUser} joining member
    * */
 
   join(member) {
     this.members.add(member);
   }
-
+  
   /** Handle member leaving a room.
    *
    * @param member {ChatUser} leaving member
    * */
-
+  
   leave(member) {
     this.members.delete(member);
+  }
+  
+  getAllUsers() {
+    const users = this.members
+    const listOfUsers = [];
+
+    for (let user of users) {
+      listOfUsers.push(user.name);
+    }
+
+    return listOfUsers;
   }
 
   /** Send message to all members in a room.

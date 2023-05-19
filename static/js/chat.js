@@ -56,6 +56,9 @@ $('form').submit(function (evt) {
   if ($('#m').val() === '/joke') {
     let data = { type: 'joke', text: '' }
     ws.send(JSON.stringify(data))
+  } else if ($('#m').val() === '/members') {
+    let data = { type: 'members', text: '' }
+    ws.send(JSON.stringify(data))
   } else {
     let data = { type: 'chat', text: $('#m').val() }
     ws.send(JSON.stringify(data))
